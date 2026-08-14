@@ -1,0 +1,21 @@
+.player-wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.contener {
+  display: flex;
+  flex-direction: column;
+}
+
+.contener.center {
+  flex: 10;
+  align-items: center;
+  padding-top: 5%;
+}
+
+.contener.side {
+  flex: 1;
+  align-items: flex-end;
+  padding: 1rem;
+}

@@ -1,0 +1,23 @@
+.main-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  height: 4px;
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+}
+
+.main-progress.is-active {
+  opacity: 1;
+}
+
+.main-progress .progress {
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  border-radius: 0;
+}

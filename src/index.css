@@ -1,0 +1,10 @@
+.aspect-ratio {
+  aspect-ratio: 1/1;
+}
+
+.shrinkable-text {
+  min-width: 0;
+  overflow: hidden;
+  flex-shrink: 1;
+  white-space: no-wrap;
+}

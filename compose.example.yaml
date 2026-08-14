@@ -1,0 +1,14 @@
+services:
+  lucky-radio-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: lucky-radio-web
+
+    environment:
+      API_URL: http://localhost:3000
+
+    ports:
+      - "8080:80"
+    restart: unless-stopped

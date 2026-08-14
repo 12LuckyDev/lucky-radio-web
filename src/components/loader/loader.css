@@ -1,0 +1,17 @@
+.circle-loader {
+  width: 20vmin;
+  aspect-ratio: 1/1;
+
+  border-radius: 50%;
+
+  border: 10px solid var(--bulma-primary);
+  border-top-color: var(--bulma-primary-light);
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
