@@ -2,9 +2,9 @@ import { createContext } from "preact";
 import type { ComponentChildren } from "preact";
 import { useContext, useEffect, useState } from "preact/hooks";
 import type { PlayerStatusDTO } from "../models/player-status-dto";
-import { api } from "../api-client/api";
-import { useNotifications } from "./notification/notification-context";
-import { errorMsgHelper } from "../core/error-msg-helper";
+import { api } from "../api/api";
+import { useNotifications } from "../../../contexts/notification/notification-context";
+import { errorMsgHelper } from "../../../core/error-msg-helper";
 
 type PlayerState = {
   isConnected: boolean;
@@ -42,7 +42,7 @@ export function PlayerProvider({ children }: { children: ComponentChildren }) {
 
   useEffect(() => {
     getStatus();
-    api.sse.listenForPlayerStatusChange(({ connected, state, volume }) => {
+    api.player.listenForPlayerStatusChange(({ connected, state, volume }) => {
       setIsConnected(connected);
       setIsPlaying(state === "play");
       setVolume(volume);

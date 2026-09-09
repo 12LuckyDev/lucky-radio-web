@@ -1,10 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
-import { api } from "../../api-client/api";
-import type { StationDTO } from "../../models/station-dto";
-import { useNotifications } from "../../contexts/notification/notification-context";
-import { useProgress } from "../../contexts/progress/progress-context";
+import type { StationDTO } from "../models/station-dto";
+import { useNotifications } from "../../../contexts/notification/notification-context";
+import { useProgress } from "../../../contexts/progress/progress-context";
 import clsx from "clsx";
-import { errorMsgHelper } from "../../core/error-msg-helper";
+import { errorMsgHelper } from "../../../core/error-msg-helper";
+import { api } from "../api/api";
 
 interface StationModalProps {
   isOpen: boolean;

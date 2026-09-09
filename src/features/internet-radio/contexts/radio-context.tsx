@@ -1,31 +1,30 @@
 import { createContext } from "preact";
 import type { ComponentChildren } from "preact";
 import { useContext, useState } from "preact/hooks";
+import { useApp } from "./app-context";
 
 type RadioState = {
   activeTab: "player" | "stations";
   setActiveTab: (tab: "player" | "stations") => void;
-  isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
+  setAsReady: () => void;
 };
 
 const initialState: RadioState = {
   activeTab: "player",
   setActiveTab: () => {},
-  isLoading: true,
-  setIsLoading: () => {},
+  setAsReady: () => {},
 };
 
 export const RadioContext = createContext<RadioState>(initialState);
 
 export function RadioProvider({ children }: { children: ComponentChildren }) {
   const [activeTab, setActiveTab] = useState<"player" | "stations">("player");
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { setModuleAsReady } = useApp();
+
+  const setAsReady = () => setModuleAsReady("i-radio");
 
   return (
-    <RadioContext.Provider
-      value={{ activeTab, setActiveTab, isLoading, setIsLoading }}
-    >
+    <RadioContext.Provider value={{ activeTab, setActiveTab, setAsReady }}>
       {children}
     </RadioContext.Provider>
   );

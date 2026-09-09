@@ -1,11 +1,11 @@
-import { Stations } from "../../features/stations/stations";
-import { Player } from "../../features/player/player";
+import { Stations } from "./stations/stations";
+import { Player } from "./player/player";
 import { AccordionGroup } from "../../components/accordion-group/accordion-group";
-import { useRadio } from "../../contexts/radio-context";
-import { StationHeader } from "../../features/stations/station-header";
-import { PlayerHeader } from "../../features/player/player-header";
+import { useRadio } from "./contexts/radio-context";
+import { StationHeader } from "./stations/station-header";
+import { PlayerHeader } from "./player/player-header";
 
-export function Radio() {
+export function InternetRadio() {
   const { activeTab, setActiveTab } = useRadio();
 
   return (

@@ -1,5 +1,5 @@
-import type { CurrentStationInfoDTO } from "./current-station-dto";
-import type { PlayerStatusUpdateDTO } from "./player-status-update-dto";
+import type { CurrentStationInfoDTO } from "../features/internet-radio/models/current-station-dto";
+import type { PlayerStatusUpdateDTO } from "../features/internet-radio/models/player-status-update-dto";
 
 export type ApiSseEventDTO =
   | {

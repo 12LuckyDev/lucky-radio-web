@@ -20,5 +20,7 @@ RUN chmod +x /docker-entrypoint.sh
 
 EXPOSE 80
 
+ENV USE_I_RADIO_PREFIX=false
+
 ENTRYPOINT ["/docker-entrypoint.sh"] 
 CMD ["nginx", "-g", "daemon off;"]

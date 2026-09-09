@@ -1,9 +1,9 @@
-import { usePlayer } from "../../contexts/player-context";
+import { usePlayer } from "../contexts/player-context";
 import clsx from "clsx";
-import { useStations } from "../../contexts/stations/stations-context";
-import { api } from "../../api-client/api";
-import { errorMsgHelper } from "../../core/error-msg-helper";
-import { useNotifications } from "../../contexts/notification/notification-context";
+import { useStations } from "../contexts/stations/stations-context";
+import { errorMsgHelper } from "../../../core/error-msg-helper";
+import { useNotifications } from "../../../contexts/notification/notification-context";
+import { api } from "../api/api";
 
 export function PlayerButton({ large }: { large?: boolean }) {
   const notifications = useNotifications();

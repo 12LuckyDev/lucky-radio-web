@@ -1,12 +1,11 @@
 import type { Dispatch } from "preact/hooks";
 import type { StationDTO } from "../../models/station-dto";
-import { api } from "../../api-client/api";
-import { withMinimumDuration } from "../../utils/with-minimum-duration";
-
 import type { StationsAction } from "./stations-state";
-import { errorMsgHelper } from "../../core/error-msg-helper";
-import type { NotificationsState } from "../notification/notification-context";
-import type { ProgressState } from "../progress/progress-context";
+import { errorMsgHelper } from "../../../../core/error-msg-helper";
+import type { NotificationsState } from "../../../../contexts/notification/notification-context";
+import type { ProgressState } from "../../../../contexts/progress/progress-context";
+import { api } from "../../api/api";
+import { withMinDuration } from "@12luckydev/utils";
 
 export async function loadStations(
   dispatch: Dispatch<StationsAction>,
@@ -32,11 +31,11 @@ export async function loadStations(
 export async function loadCurrentStation(
   dispatch: Dispatch<StationsAction>,
   setActiveTab: (tab: "stations" | "player") => void,
-  setIsLoading: (loading: boolean) => void,
+  setAsReady: () => void,
   notifications: NotificationsState,
 ) {
   try {
-    await withMinimumDuration(async () => {
+    await withMinDuration(async () => {
       const current = await api.stations.getCurrentStation();
 
       dispatch({
@@ -50,7 +49,7 @@ export async function loadCurrentStation(
     console.error("Failed to load current station", error);
     notifications.danger(errorMsgHelper(error));
   } finally {
-    setIsLoading(false);
+    setAsReady();
   }
 }
 

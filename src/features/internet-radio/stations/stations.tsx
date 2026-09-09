@@ -1,16 +1,16 @@
 import { useMemo, useState } from "preact/hooks";
-import { TilePager } from "../../components/tile-pager/tile-pager";
-import { useStations } from "../../contexts/stations/stations-context";
-import type { StationDTO } from "../../models/station-dto";
-import { AddStationTile } from "./stations-tile-pager/add-station-tile";
-import { StationTile } from "./stations-tile-pager/station-tile";
+import { TilePager } from "../../../components/tile-pager/tile-pager";
+import { useStations } from "../contexts/stations/stations-context";
+import type { StationDTO } from "../models/station-dto";
+import { AddStationTile } from "./tiles/add-station-tile";
+import { StationTile } from "./tiles/station-tile";
 import { StationModal } from "./station-modal";
-import { ConfirmationModal } from "../../components/confirmation-modal/confirmation-modal";
-import { api } from "../../api-client/api";
-import { ActionModal } from "../../components/action-modal/action-modal";
-import { useNotifications } from "../../contexts/notification/notification-context";
-import { useProgress } from "../../contexts/progress/progress-context";
-import { errorMsgHelper } from "../../core/error-msg-helper";
+import { ConfirmationModal } from "../../../components/confirmation-modal/confirmation-modal";
+import { ActionModal } from "../../../components/action-modal/action-modal";
+import { useNotifications } from "../../../contexts/notification/notification-context";
+import { useProgress } from "../../../contexts/progress/progress-context";
+import { errorMsgHelper } from "../../../core/error-msg-helper";
+import { api } from "../api/api";
 
 export function Stations() {
   const notifications = useNotifications();

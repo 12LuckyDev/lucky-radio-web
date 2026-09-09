@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@12luckydev/utils": "^3.2.0",
     "@fortawesome/fontawesome-free": "^7.3.1",
     "bulma": "^1.0.4",
     "clsx": "^2.1.1",

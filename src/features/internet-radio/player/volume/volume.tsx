@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import clsx from "clsx";
 import "./volume.css";
-import { usePlayer } from "../../../contexts/player-context";
-import { api } from "../../../api-client/api";
-import { useNotifications } from "../../../contexts/notification/notification-context";
-import { errorMsgHelper } from "../../../core/error-msg-helper";
+import { usePlayer } from "../../contexts/player-context";
+import { useNotifications } from "../../../../contexts/notification/notification-context";
+import { errorMsgHelper } from "../../../../core/error-msg-helper";
+import { api } from "../../api/api";
 
 function getVolumeIconClass(volume: number) {
   if (volume >= 90) return "fa-volume-high";

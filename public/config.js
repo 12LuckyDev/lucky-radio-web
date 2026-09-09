@@ -1,3 +1,4 @@
 window.APP_CONFIG = {
   API_URL: "__API_URL__",
+  USE_I_RADIO_PREFIX: "__USE_I_RADIO_PREFIX__",
 };

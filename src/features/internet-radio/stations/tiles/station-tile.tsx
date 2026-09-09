@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import { useStations } from "../../../contexts/stations/stations-context";
-import type { StationDTO } from "../../../models/station-dto";
 import "./station-tile.css";
 import { useRef } from "preact/hooks";
+import type { StationDTO } from "../../models/station-dto";
+import { useStations } from "../../contexts/stations/stations-context";
 
 const smallTileBreakpoint = 150;
 const mediumPlayButtonBreakpoint = 200;

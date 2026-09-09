@@ -9,7 +9,6 @@ import {
 } from "preact/hooks";
 import type { StationDTO } from "../../models/station-dto";
 import type { CurrentStationDTO } from "../../models/current-station-dto";
-import { api } from "../../api-client/api";
 import { useRadio } from "../radio-context";
 import { initialState, NO_STATIONS, UNKNOWN_STATION } from "./stations-state";
 import { stationsReducer } from "./stations-reducer";
@@ -18,9 +17,10 @@ import {
   loadCurrentStation,
   playStation as playStationApi,
 } from "./stations-actions";
-import { useNotifications } from "../notification/notification-context";
-import { errorMsgHelper } from "../../core/error-msg-helper";
-import { useProgress } from "../progress/progress-context";
+import { useNotifications } from "../../../../contexts/notification/notification-context";
+import { errorMsgHelper } from "../../../../core/error-msg-helper";
+import { useProgress } from "../../../../contexts/progress/progress-context";
+import { api } from "../../api/api";
 
 type StationsContextValue = {
   playerButtonDisabled: boolean;
@@ -64,12 +64,12 @@ export function StationsProvider({
 
   const [state, dispatch] = useReducer(stationsReducer, initialState);
   const { stations, current, selected } = state;
-  const { setActiveTab, setIsLoading } = useRadio();
+  const { setActiveTab, setAsReady } = useRadio();
 
   useEffect(() => {
     loadStations(dispatch, notifications, progress);
-    loadCurrentStation(dispatch, setActiveTab, setIsLoading, notifications);
-    const unsubscribeCurrentChange = api.sse.listenForCurrentStationChange(
+    loadCurrentStation(dispatch, setActiveTab, setAsReady, notifications);
+    const unsubscribeCurrentChange = api.stations.listenForCurrentStationChange(
       (current) => {
         dispatch({
           type: "currentChanged",
@@ -78,7 +78,7 @@ export function StationsProvider({
       },
     );
 
-    const unsubscribeStationsChange = api.sse.listenForStationsChange(() =>
+    const unsubscribeStationsChange = api.stations.listenForStationsChange(() =>
       loadStations(dispatch, notifications, progress),
     );
 

@@ -1,4 +1,4 @@
-import { useStations } from "../../contexts/stations/stations-context";
+import { useStations } from "../contexts/stations/stations-context";
 import { PlayerButton } from "./player-button";
 
 import "./player.css";

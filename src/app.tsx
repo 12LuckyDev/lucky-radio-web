@@ -1,20 +1,25 @@
 import "./app.css";
 import { Loader } from "./components/loader/loader";
-import { useRadio } from "./contexts/radio-context";
-import { Radio } from "./features/radio/radio";
+import { useApp } from "./features/internet-radio/contexts/app-context";
+import {
+  InternetRadioProvider,
+  InternetRadio,
+} from "./features/internet-radio";
 
 export function App() {
-  const { isLoading } = useRadio();
+  const { isLoading } = useApp();
 
   return (
-    <main class="main-container">
-      {isLoading ? (
-        <div class="loader-wrapper">
-          <Loader />
-        </div>
-      ) : (
-        <Radio />
-      )}
-    </main>
+    <InternetRadioProvider>
+      <main class="main-container">
+        {isLoading ? (
+          <div class="loader-wrapper">
+            <Loader />
+          </div>
+        ) : (
+          <InternetRadio />
+        )}
+      </main>
+    </InternetRadioProvider>
   );
 }
