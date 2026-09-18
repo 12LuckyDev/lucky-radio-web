@@ -42,9 +42,9 @@ export function PlayerProvider({ children }: { children: ComponentChildren }) {
 
   useEffect(() => {
     getStatus();
-    api.player.listenForPlayerStatusChange(({ connected, state, volume }) => {
+    api.player.listenForPlayerStatusChange(({ connected, status }) => {
       setIsConnected(connected);
-      setIsPlaying(state === "play");
+      setIsPlaying(status?.state === "play");
       setVolume(volume);
     });
   }, []);

@@ -2,7 +2,6 @@ import { config } from "../../../config/config";
 import type { HttpClient } from "../../../core/http-client";
 import type { SseHttpClient } from "../../../global-api/sse-http-client";
 import type { PlayerStatusDTO } from "../models/player-status-dto";
-import type { PlayerStatusUpdateDTO } from "../models/player-status-update-dto";
 
 export class PlayerHttpClient {
   private readonly http: HttpClient;
@@ -28,7 +27,7 @@ export class PlayerHttpClient {
   }
 
   public listenForPlayerStatusChange(
-    listener: (status: PlayerStatusUpdateDTO) => void,
+    listener: (status: PlayerStatusDTO) => void,
   ): () => void {
     return this.sse.listen("player.status-update", listener);
   }
