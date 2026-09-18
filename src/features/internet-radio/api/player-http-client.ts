@@ -29,6 +29,13 @@ export class PlayerHttpClient {
   public listenForPlayerStatusChange(
     listener: (status: PlayerStatusDTO) => void,
   ): () => void {
-    return this.sse.listen("player.status-update", listener);
+    return this.sse.listen(
+      "player.status-update",
+      (status: PlayerStatusDTO) => {
+        if (status.type === "MPD") {
+          listener(status);
+        }
+      },
+    );
   }
 }

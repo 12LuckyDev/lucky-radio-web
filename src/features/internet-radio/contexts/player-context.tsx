@@ -5,6 +5,7 @@ import type { PlayerStatusDTO } from "../models/player-status-dto";
 import { api } from "../api/api";
 import { useNotifications } from "../../../contexts/notification/notification-context";
 import { errorMsgHelper } from "../../../core/error-msg-helper";
+import { useOnVisibilityChange } from "../../../hooks/use-on-visibility-change";
 
 type PlayerState = {
   isConnected: boolean;
@@ -27,7 +28,7 @@ export function PlayerProvider({ children }: { children: ComponentChildren }) {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [volume, setVolume] = useState<number>(0);
 
-  async function getStatus(): Promise<void> {
+  async function fetchStatus(): Promise<void> {
     try {
       const { connected, status }: PlayerStatusDTO =
         await api.player.getStatus();
@@ -41,13 +42,15 @@ export function PlayerProvider({ children }: { children: ComponentChildren }) {
   }
 
   useEffect(() => {
-    getStatus();
+    fetchStatus();
     api.player.listenForPlayerStatusChange(({ connected, status }) => {
       setIsConnected(connected);
       setIsPlaying(status?.state === "play");
       setVolume(volume);
     });
   }, []);
+
+  useOnVisibilityChange(fetchStatus);
 
   return (
     <PlayerContext.Provider value={{ isConnected, isPlaying, volume }}>
