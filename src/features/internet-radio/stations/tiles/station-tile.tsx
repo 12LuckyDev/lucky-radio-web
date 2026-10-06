@@ -3,6 +3,7 @@ import "./station-tile.css";
 import { useRef } from "preact/hooks";
 import type { StationDTO } from "../../models/station-dto";
 import { useStations } from "../../contexts/stations/stations-context";
+import { usePlayer } from "../../contexts/player-context";
 
 const smallTileBreakpoint = 150;
 const mediumPlayButtonBreakpoint = 200;
@@ -21,6 +22,7 @@ export function StationTile({
   onAction: (station: StationDTO) => void;
 }) {
   const { current, playStation } = useStations();
+  const { isPlaying } = usePlayer();
 
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wasHeld = useRef(false);
@@ -59,7 +61,7 @@ export function StationTile({
     playStation(station);
   };
 
-  const isSelected = station.id === current?.id;
+  const isSelected = station.id === current?.id && isPlaying;
 
   if (size < smallTileBreakpoint) {
     return (

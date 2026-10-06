@@ -88,18 +88,13 @@ export function StationsProvider({
     };
   }, []);
 
-  const playStation = useCallback(
-    async (station: StationDTO) => {
-      if (current.station?.id === station.id) return;
-
-      try {
-        await playStationApi(station, notifications);
-      } catch (error) {
-        console.error("Failed to play station", error);
-      }
-    },
-    [current],
-  );
+  const playStation = useCallback(async (station: StationDTO) => {
+    try {
+      await playStationApi(station, notifications);
+    } catch (error) {
+      console.error("Failed to play station", error);
+    }
+  }, []);
 
   const playCurrentStation = useCallback(async () => {
     try {
