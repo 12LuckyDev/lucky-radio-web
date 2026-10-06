@@ -8,7 +8,7 @@ import { api } from "../api/api";
 export function PlayerButton({ large }: { large?: boolean }) {
   const notifications = useNotifications();
   const { isConnected, isPlaying } = usePlayer();
-  const { playerButtonDisabled, playSelectedStation } = useStations();
+  const { playerButtonDisabled, playCurrentStation } = useStations();
 
   const onPlayStopClick = async () => {
     if (isPlaying) {
@@ -18,7 +18,7 @@ export function PlayerButton({ large }: { large?: boolean }) {
         notifications.danger(errorMsgHelper(error));
       }
     } else {
-      await playSelectedStation();
+      await playCurrentStation();
     }
   };
 

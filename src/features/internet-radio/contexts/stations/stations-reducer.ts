@@ -12,19 +12,11 @@ export function stationsReducer(
       };
 
     case "currentChanged": {
-      const currentStation = action.payload.station;
       return {
         ...state,
         current: action.payload,
-        selected: currentStation?.id ? currentStation : state.selected,
       };
     }
-
-    case "stationSelected":
-      return {
-        ...state,
-        selected: action.payload,
-      };
 
     default:
       return state;

@@ -46,7 +46,7 @@ export function PlayerProvider({ children }: { children: ComponentChildren }) {
     api.player.listenForPlayerStatusChange(({ connected, status }) => {
       setIsConnected(connected);
       setIsPlaying(status?.state === "play");
-      setVolume(volume);
+      setVolume(status?.volume ?? 0);
     });
   }, []);
 

@@ -31,7 +31,7 @@ type StationsContextValue = {
   current: CurrentStationDTO;
   currentName: string;
   playStation(station: StationDTO): void;
-  playSelectedStation(): void;
+  playCurrentStation(): void;
   playNext(): void;
   canPlayNext: boolean;
   playPrev(): void;
@@ -44,7 +44,7 @@ const defaultValue: StationsContextValue = {
   current: null,
   currentName: NO_STATIONS,
   playStation: () => {},
-  playSelectedStation: () => {},
+  playCurrentStation: () => {},
   playNext: () => {},
   canPlayNext: false,
   playPrev: () => {},
@@ -63,7 +63,7 @@ export function StationsProvider({
   const progress = useProgress();
 
   const [state, dispatch] = useReducer(stationsReducer, initialState);
-  const { stations, current, selected } = state;
+  const { stations, current } = state;
   const { setActiveTab, setAsReady } = useRadio();
 
   useEffect(() => {
@@ -94,11 +94,6 @@ export function StationsProvider({
 
       try {
         await playStationApi(station, notifications);
-
-        dispatch({
-          type: "stationSelected",
-          payload: station,
-        });
       } catch (error) {
         console.error("Failed to play station", error);
       }
@@ -106,15 +101,16 @@ export function StationsProvider({
     [current],
   );
 
-  const playSelectedStation = useCallback(async () => {
-    if (!selected || current.station?.id === selected.id) return;
-
+  const playCurrentStation = useCallback(async () => {
     try {
-      await playStationApi(selected, notifications);
+      const { station } = current;
+      if (station !== null && station.id !== null) {
+        await playStationApi(station, notifications);
+      }
     } catch (error) {
-      console.error("Failed to play selected station", error);
+      console.error("Failed to play current station", error);
     }
-  }, [selected, current]);
+  }, [current]);
 
   const playNext = useCallback(async () => {
     if (!current.hasNext || !current.station?.id) return;
@@ -140,7 +136,7 @@ export function StationsProvider({
 
   const value = useMemo<StationsContextValue>(
     () => ({
-      playerButtonDisabled: current.station === null && selected === null,
+      playerButtonDisabled: current.station === null,
       getStations: (size: number, page: number) => {
         const start = page * size;
         return {
@@ -151,28 +147,18 @@ export function StationsProvider({
       current: current.station,
       currentName:
         current.station === null
-          ? selected === null
-            ? NO_STATIONS
-            : selected.name
+          ? NO_STATIONS
           : current.station.id
             ? current.station.name
             : UNKNOWN_STATION,
       playStation,
-      playSelectedStation,
+      playCurrentStation,
       canPlayNext: current.hasNext,
       playNext,
       canPlayPrev: current.hasPrev,
       playPrev,
     }),
-    [
-      current,
-      selected,
-      stations,
-      playStation,
-      playSelectedStation,
-      playNext,
-      playPrev,
-    ],
+    [current, stations, playStation, playCurrentStation, playNext, playPrev],
   );
 
   return (

@@ -7,13 +7,11 @@ export const UNKNOWN_STATION = "Unknown station";
 export type StationsStore = {
   stations: StationDTO[];
   current: CurrentStationInfoDTO;
-  selected: StationDTO | null;
 };
 
 export const initialState: StationsStore = {
   stations: [],
   current: { station: null, hasNext: false, hasPrev: false },
-  selected: null,
 };
 
 export type StationsAction =
@@ -24,8 +22,4 @@ export type StationsAction =
   | {
       type: "currentChanged";
       payload: CurrentStationInfoDTO;
-    }
-  | {
-      type: "stationSelected";
-      payload: StationDTO;
     };
