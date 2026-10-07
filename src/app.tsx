@@ -5,21 +5,24 @@ import {
   InternetRadioProvider,
   InternetRadio,
 } from "./features/internet-radio";
+import { VolumeProvider } from "./features/volume";
 
 export function App() {
   const { isLoading } = useApp();
 
   return (
-    <InternetRadioProvider>
-      <main class="main-container">
-        {isLoading ? (
-          <div class="loader-wrapper">
-            <Loader />
-          </div>
-        ) : (
-          <InternetRadio />
-        )}
-      </main>
-    </InternetRadioProvider>
+    <VolumeProvider>
+      <InternetRadioProvider>
+        <main class="main-container">
+          {isLoading ? (
+            <div class="loader-wrapper">
+              <Loader />
+            </div>
+          ) : (
+            <InternetRadio />
+          )}
+        </main>
+      </InternetRadioProvider>
+    </VolumeProvider>
   );
 }

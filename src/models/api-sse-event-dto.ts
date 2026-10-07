@@ -13,4 +13,8 @@ export type ApiSseEventDTO =
   | {
       type: "player.status-update";
       data: PlayerStatusDTO;
+    }
+  | {
+      type: "global-volume-change";
+      data: number | { error: string };
     };

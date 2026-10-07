@@ -1,8 +1,8 @@
+import { VolumeControl } from "../../volume";
 import { useStations } from "../contexts/stations/stations-context";
 import { PlayerButton } from "./player-button";
 
 import "./player.css";
-import { Volume } from "./volume/volume";
 
 export function Player() {
   const { currentName } = useStations();
@@ -17,7 +17,7 @@ export function Player() {
       </div>
 
       <div class="contener side">
-        <Volume vertical />
+        <VolumeControl vertical />
       </div>
     </div>
   );

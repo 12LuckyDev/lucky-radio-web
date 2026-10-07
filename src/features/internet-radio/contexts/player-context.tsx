@@ -10,13 +10,11 @@ import { useOnVisibilityChange } from "../../../hooks/use-on-visibility-change";
 type PlayerState = {
   isConnected: boolean;
   isPlaying: boolean;
-  volume: number;
 };
 
 const initialState: PlayerState = {
   isConnected: false,
   isPlaying: false,
-  volume: 0,
 };
 
 export const PlayerContext = createContext<PlayerState>(initialState);
@@ -26,7 +24,6 @@ export function PlayerProvider({ children }: { children: ComponentChildren }) {
 
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [volume, setVolume] = useState<number>(0);
 
   async function fetchStatus(): Promise<void> {
     try {
@@ -34,7 +31,6 @@ export function PlayerProvider({ children }: { children: ComponentChildren }) {
         await api.player.getStatus();
       setIsConnected(connected);
       setIsPlaying(status?.state === "play");
-      setVolume(status?.volume ?? 0);
     } catch (error) {
       console.error("Failed to get player status", error);
       notifications.danger(errorMsgHelper(error));
@@ -46,14 +42,13 @@ export function PlayerProvider({ children }: { children: ComponentChildren }) {
     api.player.listenForPlayerStatusChange(({ connected, status }) => {
       setIsConnected(connected);
       setIsPlaying(status?.state === "play");
-      setVolume(status?.volume ?? 0);
     });
   }, []);
 
   useOnVisibilityChange(fetchStatus);
 
   return (
-    <PlayerContext.Provider value={{ isConnected, isPlaying, volume }}>
+    <PlayerContext.Provider value={{ isConnected, isPlaying }}>
       {children}
     </PlayerContext.Provider>
   );

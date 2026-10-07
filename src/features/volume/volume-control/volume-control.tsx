@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import clsx from "clsx";
-import "./volume.css";
-import { usePlayer } from "../../contexts/player-context";
-import { useNotifications } from "../../../../contexts/notification/notification-context";
-import { errorMsgHelper } from "../../../../core/error-msg-helper";
-import { api } from "../../api/api";
+import { useNotifications } from "../../../contexts/notification/notification-context";
+import { api } from "../api/api";
+import { errorMsgHelper } from "../../../core/error-msg-helper";
+import { useVolume } from "../contexts/volume-context";
+
+import "./volume-control.css";
 
 function getVolumeIconClass(volume: number) {
   if (volume >= 90) return "fa-volume-high";
@@ -12,9 +13,9 @@ function getVolumeIconClass(volume: number) {
   return "fa-volume-low";
 }
 
-export function Volume({ vertical = false }: { vertical?: boolean }) {
+export function VolumeControl({ vertical = false }: { vertical?: boolean }) {
   const notifications = useNotifications();
-  const { volume } = usePlayer();
+  const { volume } = useVolume();
   const [localVolume, setLocalVolume] = useState<number>(volume);
   const [mute, setMute] = useState<boolean>(volume === 0);
   const beforeMutedVolume = useRef<number | null>(null);
@@ -27,7 +28,7 @@ export function Volume({ vertical = false }: { vertical?: boolean }) {
 
   const sendNewVolume = async (curr: number, prev: number) => {
     try {
-      await api.player.setVolume(curr);
+      await api.volume.setVolume(curr);
     } catch (error) {
       console.error("Error during changing volume", error);
       notifications.danger(errorMsgHelper(error));
