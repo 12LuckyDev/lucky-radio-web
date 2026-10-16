@@ -7,13 +7,13 @@ import { api } from "../api/api";
 
 export function PlayerButton({ large }: { large?: boolean }) {
   const notifications = useNotifications();
-  const { isConnected, isPlaying } = usePlayer();
+  const { isPlaying } = usePlayer();
   const { playerButtonDisabled, playCurrentStation } = useStations();
 
   const onPlayStopClick = async () => {
     if (isPlaying) {
       try {
-        await api.player.stopPlayer();
+        await api.iRadio.stopPlayer();
       } catch (error) {
         notifications.danger(errorMsgHelper(error));
       }
@@ -27,9 +27,8 @@ export function PlayerButton({ large }: { large?: boolean }) {
   return (
     <button
       class={clsx("button", classes, {
-        "is-loading": !isConnected,
-        "is-primary": isConnected && !isPlaying,
-        "is-danger": !isConnected || isPlaying,
+        "is-primary": !isPlaying,
+        "is-danger": isPlaying,
       })}
       disabled={playerButtonDisabled}
       onClick={onPlayStopClick}

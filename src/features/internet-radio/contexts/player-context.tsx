@@ -1,19 +1,17 @@
 import { createContext } from "preact";
 import type { ComponentChildren } from "preact";
 import { useContext, useEffect, useState } from "preact/hooks";
-import type { PlayerStatusDTO } from "../models/player-status-dto";
 import { api } from "../api/api";
 import { useNotifications } from "../../../contexts/notification/notification-context";
 import { errorMsgHelper } from "../../../core/error-msg-helper";
 import { useOnVisibilityChange } from "../../../hooks/use-on-visibility-change";
+import type { PlayerStateDTO } from "../../../dto/player-state-dto";
 
 type PlayerState = {
-  isConnected: boolean;
   isPlaying: boolean;
 };
 
 const initialState: PlayerState = {
-  isConnected: false,
   isPlaying: false,
 };
 
@@ -22,33 +20,29 @@ export const PlayerContext = createContext<PlayerState>(initialState);
 export function PlayerProvider({ children }: { children: ComponentChildren }) {
   const notifications = useNotifications();
 
-  const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  async function fetchStatus(): Promise<void> {
+  async function fetchState(): Promise<void> {
     try {
-      const { connected, status }: PlayerStatusDTO =
-        await api.player.getStatus();
-      setIsConnected(connected);
-      setIsPlaying(status?.state === "play");
+      const { state }: PlayerStateDTO = await api.iRadio.getState();
+      setIsPlaying(state === "play");
     } catch (error) {
-      console.error("Failed to get player status", error);
+      console.error("Failed to get player state", error);
       notifications.danger(errorMsgHelper(error));
     }
   }
 
   useEffect(() => {
-    fetchStatus();
-    api.player.listenForPlayerStatusChange(({ connected, status }) => {
-      setIsConnected(connected);
-      setIsPlaying(status?.state === "play");
+    fetchState();
+    api.iRadio.listenForPlayerStateChange(({ state }) => {
+      setIsPlaying(state === "play");
     });
   }, []);
 
-  useOnVisibilityChange(fetchStatus);
+  useOnVisibilityChange(fetchState);
 
   return (
-    <PlayerContext.Provider value={{ isConnected, isPlaying }}>
+    <PlayerContext.Provider value={{ isPlaying }}>
       {children}
     </PlayerContext.Provider>
   );

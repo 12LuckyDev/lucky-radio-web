@@ -111,7 +111,7 @@ export function StationsProvider({
     if (!current.hasNext || !current.station?.id) return;
 
     try {
-      await api.stations.playNext(current.station.id);
+      await api.stations.playNext();
     } catch (error) {
       console.error("Failed to play next station", error);
       notifications.danger(errorMsgHelper(error));
@@ -122,7 +122,7 @@ export function StationsProvider({
     if (!current.hasPrev || !current.station?.id) return;
 
     try {
-      await api.stations.playPrev(current.station.id);
+      await api.stations.playPrev();
     } catch (error) {
       console.error("Failed to play previous station", error);
       notifications.danger(errorMsgHelper(error));

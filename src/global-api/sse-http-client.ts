@@ -1,5 +1,5 @@
 import type { HttpClient } from "../core/http-client";
-import type { ApiSseEventDTO } from "../models/api-sse-event-dto";
+import type { ApiSseEventDTO } from "../dto/api-sse-event-dto";
 
 type SseEventMap = {
   [E in ApiSseEventDTO as E["type"]]: E["data"];

@@ -26,7 +26,7 @@ export function VolumeProvider({ children }: { children: ComponentChildren }) {
       const { volume } = await api.volume.getVolume();
       setVolume(volume);
     } catch (error) {
-      console.error("Failed to get player status", error);
+      console.error("Failed to get global volume", error);
       notifications.danger(errorMsgHelper(error));
     }
   }

@@ -1,5 +1,5 @@
 import type { CurrentStationInfoDTO } from "../features/internet-radio/models/current-station-dto";
-import type { PlayerStatusDTO } from "../features/internet-radio/models/player-status-dto";
+import type { PlayerStateWithTypeDTO } from "./player-state-dto";
 
 export type ApiSseEventDTO =
   | {
@@ -11,8 +11,8 @@ export type ApiSseEventDTO =
       data: "stations-update";
     }
   | {
-      type: "player.status-update";
-      data: PlayerStatusDTO;
+      type: "player.state-update";
+      data: PlayerStateWithTypeDTO;
     }
   | {
       type: "global-volume-change";

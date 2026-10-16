@@ -23,12 +23,12 @@ export class StationsHttpClient {
     return this.http.post(`${this.basePath}/play/${stationId}`);
   }
 
-  public playNext(stationId: string) {
-    return this.http.post(`${this.basePath}/play-next/${stationId}`);
+  public playNext() {
+    return this.http.post(`${this.basePath}/play-next`);
   }
 
-  public playPrev(stationId: string) {
-    return this.http.post(`${this.basePath}/play-prev/${stationId}`);
+  public playPrev() {
+    return this.http.post(`${this.basePath}/play-prev`);
   }
 
   public getStations(): Promise<StationDTO[]> {
