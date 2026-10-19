@@ -12,7 +12,7 @@ export function InternetRadio() {
     <AccordionGroup
       items={[
         {
-          title: "Stations",
+          title: "Radio",
           header: (headerProps) =>
             headerProps.isOpen ? null : (
               <StationHeader headerProps={headerProps} />
@@ -21,7 +21,7 @@ export function InternetRadio() {
           content: <Stations />,
         },
         {
-          title: "Radio",
+          title: "Stations",
           header: (headerProps) =>
             headerProps.isOpen ? null : (
               <PlayerHeader headerProps={headerProps} />

@@ -1,7 +1,7 @@
 import { createContext } from "preact";
 import type { ComponentChildren } from "preact";
 import { useContext, useState } from "preact/hooks";
-import { useApp } from "./app-context";
+import { useApp } from "../../global/contexts/app-context";
 
 type RadioState = {
   activeTab: "player" | "stations";

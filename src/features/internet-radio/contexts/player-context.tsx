@@ -1,11 +1,10 @@
 import { createContext } from "preact";
 import type { ComponentChildren } from "preact";
-import { useContext, useEffect, useState } from "preact/hooks";
+import { useContext } from "preact/hooks";
 import { api } from "../api/api";
-import { useNotifications } from "../../../contexts/notification/notification-context";
-import { errorMsgHelper } from "../../../core/error-msg-helper";
 import { useOnVisibilityChange } from "../../../hooks/use-on-visibility-change";
 import type { PlayerStateDTO } from "../../../dto/player-state-dto";
+import { useSyncedState } from "../../../hooks/use-synced-state";
 
 type PlayerState = {
   isPlaying: boolean;
@@ -15,31 +14,25 @@ const initialState: PlayerState = {
   isPlaying: false,
 };
 
+const isPlayingConfig = {
+  initialValue: initialState.isPlaying,
+  fetchData: async () => {
+    const { state }: PlayerStateDTO = await api.iRadio.getState();
+    return state === "play";
+  },
+  subscribe: (callback: (value: boolean) => void) =>
+    api.iRadio.listenForPlayerStateChange(({ state }) =>
+      callback(state === "play"),
+    ),
+  errorMsg: "Failed to get player state",
+};
+
 export const PlayerContext = createContext<PlayerState>(initialState);
 
 export function PlayerProvider({ children }: { children: ComponentChildren }) {
-  const notifications = useNotifications();
+  const [isPlaying, refreshState] = useSyncedState(isPlayingConfig);
 
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
-  async function fetchState(): Promise<void> {
-    try {
-      const { state }: PlayerStateDTO = await api.iRadio.getState();
-      setIsPlaying(state === "play");
-    } catch (error) {
-      console.error("Failed to get player state", error);
-      notifications.danger(errorMsgHelper(error));
-    }
-  }
-
-  useEffect(() => {
-    fetchState();
-    api.iRadio.listenForPlayerStateChange(({ state }) => {
-      setIsPlaying(state === "play");
-    });
-  }, []);
-
-  useOnVisibilityChange(fetchState);
+  useOnVisibilityChange(refreshState);
 
   return (
     <PlayerContext.Provider value={{ isPlaying }}>

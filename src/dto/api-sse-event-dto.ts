@@ -1,4 +1,5 @@
 import type { CurrentStationInfoDTO } from "../features/internet-radio/models/current-station-dto";
+import type { CurrentSongInfoDTO } from "../features/spotify/models";
 import type { PlayerStateWithTypeDTO } from "./player-state-dto";
 
 export type ApiSseEventDTO =
@@ -17,4 +18,8 @@ export type ApiSseEventDTO =
   | {
       type: "global-volume-change";
       data: number | { error: string };
+    }
+  | {
+      type: "spotify.current-update";
+      data: CurrentSongInfoDTO;
     };

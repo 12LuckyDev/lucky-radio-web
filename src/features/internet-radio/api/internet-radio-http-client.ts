@@ -25,9 +25,9 @@ export class InternetRadioHttpClient {
     return this.http.get(`${this.basePath}/state`);
   }
 
-  public listenForPlayerStateChange(
+  public listenForPlayerStateChange = (
     listener: (state: PlayerStateDTO) => void,
-  ): () => void {
+  ): (() => void) => {
     return this.sse.listen(
       "player.state-update",
       ({ state, type }: PlayerStateWithTypeDTO) => {
@@ -36,5 +36,5 @@ export class InternetRadioHttpClient {
         }
       },
     );
-  }
+  };
 }
