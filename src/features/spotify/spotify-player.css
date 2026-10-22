@@ -1,0 +1,8 @@
+.spotify {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.player-wrapper {
+  flex: 1;
+}

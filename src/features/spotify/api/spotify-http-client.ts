@@ -5,6 +5,7 @@ import type {
 } from "../../../dto/player-state-dto";
 import type { SseHttpClient } from "../../../global-api/sse-http-client";
 import type { CurrentSongInfoDTO } from "../models";
+import type { DeviceInfoDTO } from "../models/device-info.dto";
 
 export class SpotifyHttpClient {
   private readonly http: HttpClient;
@@ -25,6 +26,10 @@ export class SpotifyHttpClient {
     return this.http.get(`${this.basePath}/current`);
   }
 
+  public getDeviceInfo(): Promise<DeviceInfoDTO> {
+    return this.http.get(`${this.basePath}/device`);
+  }
+
   public listenForPlayerStateChange = (
     listener: (state: PlayerStateDTO) => void,
   ): (() => void) => {
@@ -42,5 +47,11 @@ export class SpotifyHttpClient {
     listener: (state: CurrentSongInfoDTO) => void,
   ): (() => void) => {
     return this.sse.listen("spotify.current-update", listener);
+  };
+
+  public listenForDeviceInfoChange = (
+    listener: (state: DeviceInfoDTO) => void,
+  ): (() => void) => {
+    return this.sse.listen("spotify.device-update", listener);
   };
 }

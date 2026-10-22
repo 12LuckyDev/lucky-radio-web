@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import { useNotifications } from "../contexts/notification/notification-context";
 import { errorMsgHelper } from "../core/error-msg-helper";
 
-type SyncedStateConfig<T> = {
+export type SyncedStateConfig<T> = {
   initialValue: T;
   fetchData: () => Promise<T>;
   subscribe: (onChange: (value: T) => void) => () => void;

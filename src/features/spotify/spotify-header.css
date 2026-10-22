@@ -1,0 +1,13 @@
+.device-info {
+  padding-left: 1rem;
+}
+
+@media (max-width: 768px) {
+  .icon-text-info {
+    flex-direction: column;
+  }
+
+  .icon-text-info.reversed {
+    flex-direction: column-reverse;
+  }
+}

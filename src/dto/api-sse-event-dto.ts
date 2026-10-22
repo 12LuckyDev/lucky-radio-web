@@ -1,5 +1,6 @@
 import type { CurrentStationInfoDTO } from "../features/internet-radio/models/current-station-dto";
 import type { CurrentSongInfoDTO } from "../features/spotify/models";
+import type { DeviceInfoDTO } from "../features/spotify/models/device-info.dto";
 import type { PlayerStateWithTypeDTO } from "./player-state-dto";
 
 export type ApiSseEventDTO =
@@ -22,4 +23,8 @@ export type ApiSseEventDTO =
   | {
       type: "spotify.current-update";
       data: CurrentSongInfoDTO;
+    }
+  | {
+      type: "spotify.device-update";
+      data: DeviceInfoDTO;
     };

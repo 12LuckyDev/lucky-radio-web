@@ -54,6 +54,8 @@ const defaultValue: StationsContextValue = {
 export const StationsContext =
   createContext<StationsContextValue>(defaultValue);
 
+// TODO useSyncedState
+
 export function StationsProvider({
   children,
 }: {
