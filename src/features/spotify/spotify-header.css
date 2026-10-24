@@ -2,12 +2,7 @@
   padding-left: 1rem;
 }
 
-@media (max-width: 768px) {
-  .icon-text-info {
-    flex-direction: column;
-  }
-
-  .icon-text-info.reversed {
-    flex-direction: column-reverse;
-  }
+.header {
+  border: solid var(--bulma-control-border-width) var(--bulma-border);
+  border-radius: var(--bulma-control-radius-small);
 }

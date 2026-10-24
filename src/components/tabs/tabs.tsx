@@ -32,8 +32,8 @@ export function Tabs({
   const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 
   const currentTab = tabs[activeIndex];
-  const isVertical = orientation === "vertical";
-  const axis = isVertical ? "y" : "x";
+  const isHorizontal = orientation === "horizontal";
+  const axis = isHorizontal ? "x" : "y";
   const offset = 40;
 
   const variants = {
@@ -64,11 +64,11 @@ export function Tabs({
   };
 
   return (
-    <div class={clsx("tabs", isVertical && "tabs-vertical")}>
+    <div class={clsx("tabs", isHorizontal && "tabs-horizontal")}>
       <div
-        class={clsx("tabs-menu", isVertical && "tabs-menu-vertical")}
+        class={clsx("tabs-menu", isHorizontal && "tabs-menu-horizontal")}
         role="tablist"
-        aria-orientation={isVertical ? "vertical" : "horizontal"}
+        aria-orientation={isHorizontal ? "vertical" : "horizontal"}
       >
         {tabs.map((tab) => {
           const selected = tab.id === activeTab;
@@ -82,12 +82,14 @@ export function Tabs({
               disabled={tab.disabled}
               class={clsx(
                 "button",
-                isVertical ? "is-large" : "is-medium",
+                isHorizontal ? "is-large" : "is-medium",
                 selected && "is-primary",
               )}
               onClick={() => selectTab(tab.id)}
             >
-              <span class={clsx("icon", isVertical ? "is-large" : "is-medium")}>
+              <span
+                class={clsx("icon", isHorizontal ? "is-large" : "is-medium")}
+              >
                 <i class={clsx("fas", tab.icon)}></i>
               </span>
             </button>

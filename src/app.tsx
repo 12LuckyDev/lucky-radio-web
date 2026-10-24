@@ -9,6 +9,7 @@ import { VolumeProvider } from "./features/volume";
 import Tabs, { type TabItem } from "./components/tabs/tabs";
 import { useState } from "preact/hooks";
 import { SpotifyPlayer, SpotifyProvider } from "./features/spotify";
+import { useUi } from "./contexts/ui/ui-context";
 
 const tabs: TabItem[] = [
   {
@@ -26,6 +27,7 @@ const tabs: TabItem[] = [
 ];
 
 export function App() {
+  const { orientation } = useUi();
   const { isLoading } = useApp();
   const [activeTab, setActiveTab] = useState("i-radio");
 
@@ -41,7 +43,7 @@ export function App() {
             ) : (
               <Tabs
                 tabs={tabs}
-                orientation="vertical"
+                orientation={orientation}
                 activeTab={activeTab}
                 onChange={(id) => {
                   console.log("selected tab:", id);

@@ -8,14 +8,17 @@ import { App } from "./app";
 import { NotificationProvider } from "./contexts/notification/notification-context";
 import { ProgressProvider } from "./contexts/progress/progress-context";
 import { AppProvider } from "./features/global/contexts/app-context";
+import { UiProvider } from "./contexts/ui/ui-context";
 
 render(
-  <NotificationProvider>
-    <ProgressProvider>
-      <AppProvider>
-        <App />
-      </AppProvider>
-    </ProgressProvider>
-  </NotificationProvider>,
+  <UiProvider>
+    <NotificationProvider>
+      <ProgressProvider>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </ProgressProvider>
+    </NotificationProvider>
+  </UiProvider>,
   document.getElementById("app")!,
 );

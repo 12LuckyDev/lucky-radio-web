@@ -41,12 +41,12 @@
   overflow-x: hidden;
 }
 
-.tabs.tabs-vertical {
+.tabs.tabs-horizontal {
   flex-direction: row;
   align-items: stretch;
 }
 
-.tabs-menu.tabs-menu-vertical {
+.tabs-menu.tabs-menu-horizontal {
   flex: 0 0 auto;
   flex-direction: column;
 

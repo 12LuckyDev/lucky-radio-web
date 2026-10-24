@@ -56,6 +56,5 @@ export const ProgressProvider: FunctionComponent<{
 };
 
 export function useProgress() {
-  const context = useContext(ProgressContext);
-  return context;
+  return useContext(ProgressContext);
 }
