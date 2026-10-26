@@ -90,18 +90,13 @@ export function SpotifyHeader() {
 
   const deviceIcon = getDeviceTypeIcon(type);
 
+  const deviceName = name ?? "No device connected";
+  const deviceUser = username ?? "No user connected to device";
+
   const info = isMobile ? (
-    <SmallInfo
-      name={name ?? "librespot"}
-      username={username ?? "username"}
-      icon={deviceIcon}
-    />
+    <SmallInfo name={deviceName} username={deviceUser} icon={deviceIcon} />
   ) : (
-    <BigInfo
-      name={name ?? "librespot"}
-      username={username ?? "username"}
-      icon={deviceIcon}
-    />
+    <BigInfo name={deviceName} username={deviceUser} icon={deviceIcon} />
   );
 
   return <div class="header">{info}</div>;

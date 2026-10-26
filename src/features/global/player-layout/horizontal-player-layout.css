@@ -1,0 +1,33 @@
+.horizontal-player-content {
+  display: flex;
+  height: 100%;
+  flex: 1;
+  gap: 1rem;
+}
+
+.horizontal-player-content .player-img-wrapper {
+  max-height: 100%;
+  max-width: 33%;
+}
+
+.horizontal-player-content .player-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.horizontal-player-content .contener {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal-player-content .contener.center {
+  flex: 1Q;
+  align-items: center;
+  padding-top: 5%;
+}
+
+.horizontal-player-content .contener.side {
+  flex: 1;
+  align-items: flex-end;
+  padding: 5% 1rem;
+}

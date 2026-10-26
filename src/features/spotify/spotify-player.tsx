@@ -15,6 +15,8 @@ export function SpotifyPlayer() {
       <SpotifyHeader />
       <div class="player-wrapper">
         <PlayerLayout
+          useFallbackImage
+          imageUrl={song?.imageUrl}
           currentInfoChildren={
             song !== null ? (
               <>

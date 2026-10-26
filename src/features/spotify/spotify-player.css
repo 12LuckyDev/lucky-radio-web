@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100%;
 }
+
 .player-wrapper {
   flex: 1;
 }
