@@ -21,7 +21,7 @@
 }
 
 .horizontal-player-content .contener.center {
-  flex: 1Q;
+  flex: 10;
   align-items: center;
   padding-top: 5%;
 }

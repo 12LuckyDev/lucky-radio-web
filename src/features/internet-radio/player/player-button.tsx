@@ -26,10 +26,7 @@ export function PlayerButton({ large }: { large?: boolean }) {
 
   return (
     <button
-      class={clsx("button", classes, {
-        "is-primary": !isPlaying,
-        "is-danger": isPlaying,
-      })}
+      class={clsx("button", classes, isPlaying ? "is-danger" : "is-primary")}
       disabled={playerButtonDisabled}
       onClick={onPlayStopClick}
     >

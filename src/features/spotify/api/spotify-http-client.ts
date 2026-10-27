@@ -30,6 +30,14 @@ export class SpotifyHttpClient {
     return this.http.get(`${this.basePath}/device`);
   }
 
+  public resume(): Promise<void> {
+    return this.http.post(`${this.basePath}/resume`);
+  }
+
+  public pause(): Promise<void> {
+    return this.http.post(`${this.basePath}/pause`);
+  }
+
   public listenForPlayerStateChange = (
     listener: (state: PlayerStateDTO) => void,
   ): (() => void) => {
