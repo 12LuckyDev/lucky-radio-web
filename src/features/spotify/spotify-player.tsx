@@ -1,7 +1,7 @@
 import { PlayerLayout } from "../global/player-layout/player-layout";
 import { useSpotify } from "./contexts/spotify-context";
 import { SpotifyHeader } from "./spotify-header";
-import { SpotifyPlayerButton } from "./spotify-player-button";
+import { SpotifyPlayerButtons } from "./spotify-player-buttons";
 
 import "./spotify-player.css";
 
@@ -28,7 +28,7 @@ export function SpotifyPlayer() {
               <h1 class="title is-3">No song</h1>
             )
           }
-          playerControlsChildren={<SpotifyPlayerButton />}
+          playerControlsChildren={<SpotifyPlayerButtons />}
         />
       </div>
     </div>
