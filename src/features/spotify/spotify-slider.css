@@ -1,0 +1,18 @@
+.spotify-slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.spotify-slider-wrapper .times {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+
+  color: var(--bulma-text-weak);
+  font-size: var(--bulma-size-small);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}

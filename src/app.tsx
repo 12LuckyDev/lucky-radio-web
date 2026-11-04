@@ -7,7 +7,6 @@ import {
 } from "./features/internet-radio";
 import { VolumeProvider } from "./features/volume";
 import Tabs, { type TabItem } from "./components/tabs/tabs";
-import { useState } from "preact/hooks";
 import { SpotifyPlayer, SpotifyProvider } from "./features/spotify";
 import { useUi } from "./contexts/ui/ui-context";
 
@@ -28,8 +27,7 @@ const tabs: TabItem[] = [
 
 export function App() {
   const { orientation } = useUi();
-  const { isLoading } = useApp();
-  const [activeTab, setActiveTab] = useState("i-radio");
+  const { isLoading, activeTab, setActiveTab } = useApp();
 
   return (
     <VolumeProvider>

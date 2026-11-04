@@ -15,6 +15,7 @@ type SpotifyState = {
   isPlaying: boolean;
   current: CurrentSongInfoDTO;
   device: DeviceInfoDTO;
+  position: number;
 };
 
 const initialState: SpotifyState = {
@@ -25,6 +26,7 @@ const initialState: SpotifyState = {
     type: null,
     username: null,
   },
+  position: 0,
 };
 
 const isPlayingConfig: SyncedStateConfig<boolean> = {
@@ -54,21 +56,33 @@ const deviceInfoConfig = {
   errorMsg: "Failed to get spotify device info",
 };
 
+const positionInfoConfig: SyncedStateConfig<number> = {
+  initialValue: initialState.position,
+  fetchData: async () => {
+    const { position } = await api.spotify.getPosition();
+    return position;
+  },
+  subscribe: api.spotify.listenForPositionhange,
+  errorMsg: "Failed to get spotify device info",
+};
+
 export const SpotifyContext = createContext<SpotifyState>(initialState);
 
 export function SpotifyProvider({ children }: { children: ComponentChildren }) {
   const [isPlaying, refreshState] = useSyncedState(isPlayingConfig);
   const [current, refreshCurrent] = useSyncedState(currentConfig);
   const [device, refreshDevice] = useSyncedState(deviceInfoConfig);
+  const [position, refreshPosition] = useSyncedState(positionInfoConfig);
 
   useOnVisibilityChange(async () => {
     await refreshState();
     await refreshCurrent();
     await refreshDevice();
+    await refreshPosition();
   });
 
   return (
-    <SpotifyContext.Provider value={{ isPlaying, current, device }}>
+    <SpotifyContext.Provider value={{ isPlaying, current, device, position }}>
       {children}
     </SpotifyContext.Provider>
   );

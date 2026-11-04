@@ -27,4 +27,8 @@ export type ApiSseEventDTO =
   | {
       type: "spotify.device-update";
       data: DeviceInfoDTO;
+    }
+  | {
+      type: "spotify-position-change";
+      data: number;
     };

@@ -19,12 +19,12 @@ export function HorizontalPlayerLayout({
           <img class="player-img" src={imageUrl} />
         </div>
       )}
-      <div class="contener center">
+      <div class="container center">
         {currentInfoChildren}
         {playerControlsChildren}
       </div>
 
-      <div class="contener side">
+      <div class="container side">
         <VolumeControl vertical />
       </div>
     </div>

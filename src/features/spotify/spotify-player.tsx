@@ -4,6 +4,7 @@ import { SpotifyHeader } from "./spotify-header";
 import { SpotifyPlayerButtons } from "./spotify-player-buttons";
 
 import "./spotify-player.css";
+import { SpotifySlider } from "./spotify-slider";
 
 export function SpotifyPlayer() {
   const {
@@ -28,7 +29,12 @@ export function SpotifyPlayer() {
               <h1 class="title is-3">No song</h1>
             )
           }
-          playerControlsChildren={<SpotifyPlayerButtons />}
+          playerControlsChildren={
+            <>
+              <SpotifyPlayerButtons />
+              <SpotifySlider />
+            </>
+          }
         />
       </div>
     </div>

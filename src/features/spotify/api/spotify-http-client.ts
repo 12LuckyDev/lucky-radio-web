@@ -46,6 +46,14 @@ export class SpotifyHttpClient {
     return this.http.post(`${this.basePath}/prev`);
   }
 
+  public seek(position: number): Promise<void> {
+    return this.http.post(`${this.basePath}/seek/${position}`);
+  }
+
+  public getPosition(): Promise<{ position: number }> {
+    return this.http.get(`${this.basePath}/position`);
+  }
+
   public listenForPlayerStateChange = (
     listener: (state: PlayerStateDTO) => void,
   ): (() => void) => {
@@ -60,14 +68,20 @@ export class SpotifyHttpClient {
   };
 
   public listenForCurrentChange = (
-    listener: (state: CurrentSongInfoDTO) => void,
+    listener: (curent: CurrentSongInfoDTO) => void,
   ): (() => void) => {
     return this.sse.listen("spotify.current-update", listener);
   };
 
   public listenForDeviceInfoChange = (
-    listener: (state: DeviceInfoDTO) => void,
+    listener: (info: DeviceInfoDTO) => void,
   ): (() => void) => {
     return this.sse.listen("spotify.device-update", listener);
+  };
+
+  public listenForPositionhange = (
+    listener: (position: number) => void,
+  ): (() => void) => {
+    return this.sse.listen("spotify-position-change", listener);
   };
 }
