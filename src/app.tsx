@@ -9,6 +9,7 @@ import { VolumeProvider } from "./features/volume";
 import Tabs, { type TabItem } from "./components/tabs/tabs";
 import { SpotifyPlayer, SpotifyProvider } from "./features/spotify";
 import { useUi } from "./contexts/ui/ui-context";
+import { PlayerSizesProvider } from "./features/global/contexts/player-sizes-context";
 
 const tabs: TabItem[] = [
   {
@@ -30,28 +31,30 @@ export function App() {
   const { isLoading, activeTab, setActiveTab } = useApp();
 
   return (
-    <VolumeProvider>
-      <InternetRadioProvider>
-        <SpotifyProvider>
-          <main class="main-container">
-            {isLoading ? (
-              <div class="loader-wrapper">
-                <Loader />
-              </div>
-            ) : (
-              <Tabs
-                tabs={tabs}
-                orientation={orientation}
-                activeTab={activeTab}
-                onChange={(id) => {
-                  console.log("selected tab:", id);
-                  setActiveTab(id);
-                }}
-              />
-            )}
-          </main>
-        </SpotifyProvider>
-      </InternetRadioProvider>
-    </VolumeProvider>
+    <PlayerSizesProvider>
+      <VolumeProvider>
+        <InternetRadioProvider>
+          <SpotifyProvider>
+            <main class="main-container">
+              {isLoading ? (
+                <div class="loader-wrapper">
+                  <Loader />
+                </div>
+              ) : (
+                <Tabs
+                  tabs={tabs}
+                  orientation={orientation}
+                  activeTab={activeTab}
+                  onChange={(id) => {
+                    console.log("selected tab:", id);
+                    setActiveTab(id);
+                  }}
+                />
+              )}
+            </main>
+          </SpotifyProvider>
+        </InternetRadioProvider>
+      </VolumeProvider>
+    </PlayerSizesProvider>
   );
 }

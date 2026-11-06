@@ -4,9 +4,12 @@ import { useStations } from "../contexts/stations/stations-context";
 import { errorMsgHelper } from "../../../core/error-msg-helper";
 import { useNotifications } from "../../../contexts/notification/notification-context";
 import { api } from "../api/api";
+import { usePlayerSizes } from "../../global/contexts/player-sizes-context";
 
 export function PlayerButton({ large }: { large?: boolean }) {
   const notifications = useNotifications();
+  const { playerButtonsSize, playerButtonIconsSize } = usePlayerSizes();
+
   const { isPlaying } = usePlayer();
   const { playerButtonDisabled, playCurrentStation } = useStations();
 
@@ -22,7 +25,9 @@ export function PlayerButton({ large }: { large?: boolean }) {
     }
   };
 
-  const classes = large ? ["is-large", "is-rounded", "aspect-ratio"] : [];
+  const classes = large
+    ? [playerButtonsSize, "is-responsive", "is-rounded", "aspect-ratio"]
+    : [];
 
   return (
     <button
@@ -32,9 +37,11 @@ export function PlayerButton({ large }: { large?: boolean }) {
     >
       <span class="icon">
         <i
-          class={clsx("fas", isPlaying ? "fa-stop" : "fa-play", {
-            "fa-lg": large,
-          })}
+          class={clsx(
+            "fas",
+            isPlaying ? "fa-stop" : "fa-play",
+            large && playerButtonIconsSize,
+          )}
         ></i>
       </span>
     </button>

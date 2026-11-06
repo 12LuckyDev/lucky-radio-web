@@ -5,9 +5,11 @@ import { errorMsgHelper } from "../../core/error-msg-helper";
 import { useNotifications } from "../../contexts/notification/notification-context";
 
 import "./spotify-player-buttons.css";
+import { usePlayerSizes } from "../global/contexts/player-sizes-context";
 
 export function SpotifyPlayerButtons() {
   const notifications = useNotifications();
+  const { playerButtonsSize, playerButtonIconsSize } = usePlayerSizes();
 
   const {
     isPlaying,
@@ -47,43 +49,44 @@ export function SpotifyPlayerButtons() {
     }
   };
 
+  const buttonClasses = [
+    "button",
+    playerButtonsSize,
+    "is-responsive",
+    "is-rounded",
+    "aspect-ratio",
+  ];
+  const iconClasses = ["fas", playerButtonIconsSize];
+
   return (
     <div class="spotify-buttons-wrapper">
       <button
-        class="button is-large is-rounded aspect-ratio"
+        class={clsx(buttonClasses)}
         disabled={disabled}
         onClick={onPrevClick}
       >
         <span class="icon">
-          <i class="fas fa-lg fa-backward"></i>
+          <i class={clsx(iconClasses, "fa-backward")}></i>
         </span>
       </button>
 
       <button
-        class={clsx(
-          "button",
-          "is-large",
-          "is-rounded",
-          "aspect-ratio",
-          isPlaying ? "is-danger" : "is-primary",
-        )}
+        class={clsx(buttonClasses, isPlaying ? "is-danger" : "is-primary")}
         disabled={disabled}
         onClick={onPlayPauseClick}
       >
         <span class="icon">
-          <i
-            class={clsx("fas", "fa-lg", isPlaying ? "fa-pause" : "fa-play")}
-          ></i>
+          <i class={clsx(iconClasses, isPlaying ? "fa-pause" : "fa-play")}></i>
         </span>
       </button>
 
       <button
-        class="button is-large is-rounded aspect-ratio"
+        class={clsx(buttonClasses)}
         disabled={disabled}
         onClick={onNextClick}
       >
         <span class="icon">
-          <i class="fas fa-lg fa-forward"></i>
+          <i class={clsx(iconClasses, "fa-forward")}></i>
         </span>
       </button>
     </div>
