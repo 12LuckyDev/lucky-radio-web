@@ -37,12 +37,16 @@ export function AppProvider({ children }: { children: ComponentChildren }) {
     const getCurrent = async () => {
       try {
         const { current } = await api.global.getCurrent();
-        if (current === "i-radio" || current === "spotify") {
-          setActiveTab(current);
+        if (
+          current === "i-radio" ||
+          current === "spotify" ||
+          current === null
+        ) {
+          setActiveTab(current ?? "i-radio");
           setAppReady(true);
         }
       } catch (error) {
-        console.error("Failed to play previous station", error);
+        console.error("Failed to play get current player", error);
         setAppReady(true);
       }
     };
