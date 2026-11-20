@@ -33,7 +33,9 @@ export function SpotifyPlayer() {
                 </Marquee>
               </>
             ) : (
-              <h1 class="title is-3">No song</h1>
+              <Marquee>
+                <h1 class="title is-3">No song</h1>
+              </Marquee>
             )
           }
           playerControlsChildren={

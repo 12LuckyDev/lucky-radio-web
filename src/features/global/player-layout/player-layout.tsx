@@ -3,8 +3,9 @@ import type { ComponentChildren } from "preact";
 import { VerticalPlayerLayout } from "./vertical-player-layout";
 import { HorizontalPlayerLayout } from "./horizontal-player-layout";
 import { useUi } from "../../../contexts/ui/ui-context";
+import { publicUrlHelper } from "../../../config/public-url-helper";
 
-const FALLBACK_IMG = "/no-cover.png";
+const FALLBACK_IMG = publicUrlHelper("/no-cover.png");
 
 export function PlayerLayout({
   imageUrl = null,
