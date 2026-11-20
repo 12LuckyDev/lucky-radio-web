@@ -2,7 +2,7 @@ import { config } from "../config/config";
 import { HttpClient } from "../core/http-client";
 import { SseHttpClient } from "./sse-http-client";
 
-const http = new HttpClient(`${config.apiUrl}/v1`);
+const http = new HttpClient(config.apiUrl);
 
 export const api = {
   http,
