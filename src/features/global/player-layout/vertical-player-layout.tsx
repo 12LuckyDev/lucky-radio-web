@@ -22,8 +22,8 @@ export function VerticalPlayerLayout({
             <img class="player-img" src={imageUrl} />
           </div>
         )}
-        {currentInfoChildren}
-        {playerControlsChildren}
+        <div class="info-wrapper">{currentInfoChildren}</div>
+        <div class="controls-wrapper">{playerControlsChildren}</div>
       </div>
 
       <div class="contener side">

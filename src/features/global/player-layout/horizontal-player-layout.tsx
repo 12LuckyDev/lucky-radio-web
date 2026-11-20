@@ -20,8 +20,8 @@ export function HorizontalPlayerLayout({
         </div>
       )}
       <div class="container center">
-        {currentInfoChildren}
-        {playerControlsChildren}
+        <div class="info-wrapper">{currentInfoChildren}</div>
+        <div class="controls-wrapper">{playerControlsChildren}</div>
       </div>
 
       <div class="container side">

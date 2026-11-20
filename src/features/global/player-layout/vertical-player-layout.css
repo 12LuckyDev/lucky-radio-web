@@ -6,9 +6,11 @@
 
 .vertical-player-content .player-img-wrapper {
   max-height: 40vh;
+  min-height: 0;
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
+  flex-shrink: 1;
 }
 
 .vertical-player-content .player-img {
@@ -23,6 +25,8 @@
 
 .vertical-player-content .contener.center {
   flex: 10;
+  flex-shrink: 1;
+  min-width: 0;
   align-items: center;
   padding-top: 5%;
 }
@@ -31,4 +35,14 @@
   flex: 1;
   align-items: flex-end;
   padding: 5% 1rem;
+}
+
+.vertical-player-content .info-wrapper {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.vertical-player-content .controls-wrapper {
+  margin-top: 0.5rem;
+  flex-shrink: 0;
 }

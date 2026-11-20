@@ -1,0 +1,42 @@
+.marquee {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.marquee-track:not(.is-animated) {
+  width: 100%;
+  justify-content: center;
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.marquee-content + .marquee-content {
+  margin-left: var(--gap);
+}
+
+.marquee-track.is-animated {
+  animation: marquee var(--duration) linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-1 * var(--distance)));
+  }
+}
